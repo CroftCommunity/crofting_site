@@ -278,6 +278,16 @@ main { padding-block: 1.5rem 4rem; }
   padding: 0;
 }
 .bedrock-links > li { margin-bottom: 0.5rem; }
+.bedrock-links a { overflow-wrap: anywhere; }
+
+/* ---- Colophon (guide-page footnote line) ---- */
+.colophon {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--granite);
+  margin-top: var(--section-gap);
+}
 
 /* ---- Plain link lists (library) ---- */
 .link-list {
