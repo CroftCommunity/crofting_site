@@ -52,10 +52,30 @@ not de-duplicated. If you edit one, edit the other to match.
 | `wall.html` | Pillar page: The Wall. |
 | `valley.html` | Pillar page: The Valley. |
 | `library.html` | The Bedrock index — links out to the discovery repo. |
+| `arecipe/index.html` | Guide page for arecipe (served at `croft.ing/arecipe`). |
+| `skylite/index.html` | Guide page for Skylite (served at `croft.ing/skylite`). |
 | `styles.css` | The single stylesheet. |
+| `checks/check_site.py` | Standing regression net — see below. |
 | `assets/fonts/` | Self-hosted Lora and Inter (woff2) plus their OFL licenses. |
 | `assets/favicon.svg` | The drystone-cairn favicon. |
 | `CNAME` | The custom domain (`croft.ing`) for GitHub Pages. |
+
+## Guide pages
+
+Beyond the pillar pages, individual crops get their own depth-tiered guide page
+under a directory so they resolve as clean paths (`croft.ing/arecipe`,
+`croft.ing/skylite`). These pages reuse the shared header, footer, palette, type,
+and tier-label styling; because they live one level deep, they reference shared
+assets by absolute root paths (`/styles.css`, `/assets/favicon.svg`).
+
+## Checks
+
+`python3 checks/check_site.py` is the standing regression net (Python 3 stdlib
+only, no dependencies). It verifies the whole site: no `<script>` on any page,
+`CNAME` is exactly `croft.ing`, every internal href/asset reference resolves to a
+real file, external URLs stay on a small allowlist, and the pillar pages' tier
+labels and Signpost/Surface text stay in sync with the landing page. It exits
+nonzero on any failure.
 
 ## Palette and type — source of record
 
