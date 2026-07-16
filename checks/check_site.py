@@ -165,10 +165,12 @@ def check_internal_refs(files):
 
 
 ALLOWED_HOSTS = {
+    "croft.ing",  # the site's own canonical URL, cited on the terms pages
     "arecipe.app",
     "arecipe.croft.ing",
     "skylite.croft.ing",
     "recipe.exchange",
+    "pluralistic.net",
 }
 
 
@@ -265,6 +267,37 @@ def check_new_pages():
           bool(growing) and "Skylite" in growing.group(0))
 
 
+def check_terms_pages():
+    # terms/index.html
+    terms_path = os.path.join(ROOT, "terms", "index.html")
+    if check("terms/index.html exists", os.path.exists(terms_path)):
+        html = read(terms_path)
+        check("terms index entry links to /terms/ens/",
+              'href="/terms/ens/"' in html)
+        text = strip_tags(html)
+        check("terms index carries the ENS one-liner",
+              "A polite acronym for how platforms rot." in text)
+
+    # terms/ens/index.html
+    ens_path = os.path.join(ROOT, "terms", "ens", "index.html")
+    if check("terms/ens/index.html exists", os.path.exists(ens_path)):
+        html = read(ens_path)
+        labels = tier_labels(html)
+        check("ENS page has THE SIGNPOST, THE SURFACE, THE SOIL, "
+              "THE BEDROCK in order",
+              is_subsequence(["THE SIGNPOST", "THE SURFACE",
+                              "THE SOIL", "THE BEDROCK"], labels))
+        text = strip_tags(html)
+        check("ENS page contains 'A polite acronym for how platforms rot.'",
+              "A polite acronym for how platforms rot." in text)
+        check("ENS page contains 'ENS is Not Service'",
+              "ENS is Not Service" in text)
+
+    # library.html links to the terms index
+    library = read(os.path.join(ROOT, "library.html"))
+    check("library.html links to /terms/", 'href="/terms/"' in library)
+
+
 def main():
     files = html_files()
     check_no_scripts(files)
@@ -273,6 +306,7 @@ def main():
     check_external_allowlist(files)
     check_pillar_tiers_and_sync()
     check_new_pages()
+    check_terms_pages()
 
     print("checks run: %d" % CHECKS_RUN)
     if FAILURES:
