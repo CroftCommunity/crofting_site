@@ -6,5 +6,6 @@
 **Not this repo:** the product (croft), the standards site (croft-pwa), the directory (connect).
 Card + altitudes: `CroftC/.claude/ARCHITECTURE.md`. `terms/` holds the static terms
 pages served under croft.ing. Concurrent-session norms:
-`CroftC/.claude/COORDINATION.md` (multi-turn work in `worktrees/crofting_site/<slug>`,
+`CroftC/.claude/COORDINATION.md` (multi-turn work in a worktree —
+`git -C crofting_site worktree add ../worktrees/<feature>/crofting_site -b claude/<feature>` —
 never this checkout).

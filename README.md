@@ -12,9 +12,10 @@ This site is plain HTML and one CSS file. There is:
 - no external requests — fonts are self-hosted, there are no CDN links, no
   analytics, no external images, and no tracking of any kind.
 
-The only outbound `http(s)` references anywhere are intentional links the reader
-can click (the discovery repo on GitHub, and arecipe.app). Nothing is loaded from
-a third party. The pages render correctly both from `file://` and from a static
+Outbound links are limited to the allowlist in `checks/check_site.py`, and every
+one is a link the reader can click: `croft.ing`, `arecipe.app`,
+`arecipe.croft.ing`, `bluebird.croft.ing`, `recipe.exchange`, `pluralistic.net`,
+and `github.com/CroftCommunity/*`. Nothing is loaded from a third party. The pages render correctly both from `file://` and from a static
 server.
 
 ## Preview
@@ -53,7 +54,9 @@ not de-duplicated. If you edit one, edit the other to match.
 | `valley.html` | Pillar page: The Valley. |
 | `library.html` | The Bedrock index — links out to the discovery repo. |
 | `arecipe/index.html` | Guide page for arecipe (served at `croft.ing/arecipe`). |
-| `skylite/index.html` | Guide page for Skylite (served at `croft.ing/skylite`). |
+| `skylite/index.html` | Guide page for Bluebird, formerly Skylite (served at `croft.ing/skylite`; the path predates the rename). |
+| `terms/index.html` | The terms index (served at `croft.ing/terms`). |
+| `terms/ens/index.html` | Terms page: ENS (served at `croft.ing/terms/ens`). |
 | `styles.css` | The single stylesheet. |
 | `checks/check_site.py` | Standing regression net — see below. |
 | `assets/fonts/` | Self-hosted Lora and Inter (woff2) plus their OFL licenses. |
@@ -64,7 +67,7 @@ not de-duplicated. If you edit one, edit the other to match.
 
 Beyond the pillar pages, individual crops get their own depth-tiered guide page
 under a directory so they resolve as clean paths (`croft.ing/arecipe`,
-`croft.ing/skylite`). These pages reuse the shared header, footer, palette, type,
+`croft.ing/skylite` for Bluebird). These pages reuse the shared header, footer, palette, type,
 and tier-label styling; because they live one level deep, they reference shared
 assets by absolute root paths (`/styles.css`, `/assets/favicon.svg`).
 

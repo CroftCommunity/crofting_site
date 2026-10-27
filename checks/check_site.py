@@ -168,7 +168,7 @@ ALLOWED_HOSTS = {
     "croft.ing",  # the site's own canonical URL, cited on the terms pages
     "arecipe.app",
     "arecipe.croft.ing",
-    "skylite.croft.ing",
+    "bluebird.croft.ing",
     "recipe.exchange",
     "pluralistic.net",
 }
@@ -249,7 +249,9 @@ def check_new_pages():
         check("arecipe page contains the Amanda tagline",
               "arecipe: the a is for Amanda" in text)
 
-    # skylite/index.html
+    # skylite/index.html — Bluebird's guide page; the path predates the
+    # Skylite -> Bluebird rename (2026-08-26) and is kept so croft.ing/skylite
+    # still resolves.
     skylite_path = os.path.join(ROOT, "skylite", "index.html")
     if check("skylite/index.html exists", os.path.exists(skylite_path)):
         html = read(skylite_path)
@@ -260,11 +262,11 @@ def check_new_pages():
         check("skylite page contains the butterfly-garden signpost",
               "A tended window into the butterfly garden of Bluesky." in text)
 
-    # index.html growing section mentions Skylite
+    # index.html growing section mentions Bluebird
     index = read(os.path.join(ROOT, "index.html"))
     growing = re.search(r'id="growing".*?</section>', index, re.DOTALL)
-    check("index.html growing section contains 'Skylite'",
-          bool(growing) and "Skylite" in growing.group(0))
+    check("index.html growing section contains 'Bluebird'",
+          bool(growing) and "Bluebird" in growing.group(0))
 
 
 def check_terms_pages():
